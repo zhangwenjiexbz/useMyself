@@ -1,10 +1,7 @@
 package com.example.highlevel.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.ttl.TtlRunnable;
 import com.example.highlevel.dotest.AsyncClass;
-import com.example.highlevel.pojo.Food;
 import com.example.highlevel.pojo.FoodDetail;
 import com.example.highlevel.pojo.TestPojo;
 import com.example.highlevel.pojo.Type;
@@ -22,13 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.DelayQueue;
 
 @RestController
 @RequestMapping("/test")
