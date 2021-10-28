@@ -1,0 +1,11 @@
+
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ã‹Óúÿÿÿÿ
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õ˜›úÿÿÿÿ
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ãëóéşÿÿÿÿ8Ù„¼¼É/
+t
+java:S2142"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€
+{
+java:S2142""^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€8¯“¹¼É/
+U	java:S106"9Replace this use of System.out or System.err by a logger.(Ë¤8Ş„¼¼É/
+Z	java:S106 "9Replace this use of System.out or System.err by a logger.(Àı¡ˆüÿÿÿÿ8şú½¼É/
+U	java:S106!"9Replace this use of System.out or System.err by a logger.(•Œ®¿8ÿú½¼É/

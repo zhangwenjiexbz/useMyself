@@ -1,0 +1,9 @@
+
+G
+java:S1602
+",Remove useless curly braces around statement(°£öúÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(îÙÑ‡üÿÿÿÿ
+B
+java:S1602",Remove useless curly braces around statement(ìŞ€Ì
+N	java:S106"9Replace this use of System.out or System.err by a logger.(û†¤ì
+U	java:S106"9Replace this use of System.out or System.err by a logger.(ûõß8İîï–É/
