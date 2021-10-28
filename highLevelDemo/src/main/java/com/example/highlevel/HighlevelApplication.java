@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan({ "com.example.highlevel.config",
         "com.example.highlevel.controller",
         "com.example.highlevel.dotest",
+        "com.example.highlevel.gitconfig",
         "com.example.highlevel.service" })
 
 @SpringBootApplication

@@ -89,10 +89,16 @@
             <artifactId>simpleclient_pushgateway</artifactId>
             <version>0.9.0</version>
         </dependency>
+        <!-- spring cloud config 客户端包 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
-            <version>2.1.6.RELEASE</version>
+            <artifactId>spring-cloud-starter-config</artifactId>
+            <version>2.1.9.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
 

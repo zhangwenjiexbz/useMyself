@@ -2,6 +2,7 @@ package com.example.highlevel.controller;
 
 import com.alibaba.ttl.TtlRunnable;
 import com.example.highlevel.dotest.AsyncClass;
+import com.example.highlevel.gitconfig.GitConfig;
 import com.example.highlevel.pojo.FoodDetail;
 import com.example.highlevel.pojo.TestPojo;
 import com.example.highlevel.pojo.Type;
@@ -43,6 +44,9 @@ public class TestController {
     
     @Resource
     private FoodRepository foodRepository;
+    
+    @Resource
+    private GitConfig gitConfig;
     
     @RequestMapping("/doSomeTest")
     public TestPojo doSomeTest(){
@@ -134,6 +138,11 @@ public class TestController {
         }
         return foodDetails;
 
+    }
+    
+    @RequestMapping("/food/config")
+    public Object getGitConfig() {
+        return gitConfig;
     }
     
     public <T> List<T> castEntity(List<Object[]> objects,Class<T> clazz) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
