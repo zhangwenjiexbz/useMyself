@@ -3,10 +3,12 @@ package com.example.highlevel.controller;
 import com.alibaba.ttl.TtlRunnable;
 import com.example.highlevel.dotest.AsyncClass;
 import com.example.highlevel.gitconfig.GitConfig;
+import com.example.highlevel.pojo.Customer;
 import com.example.highlevel.pojo.FoodDetail;
 import com.example.highlevel.pojo.TestPojo;
 import com.example.highlevel.pojo.Type;
 import com.example.highlevel.request.BaseRequestBody;
+import com.example.highlevel.service.CustomerRepository;
 import com.example.highlevel.service.FoodRepository;
 import com.example.highlevel.service.FoodTypeRepository;
 import com.example.highlevel.service.TestService;
@@ -26,6 +28,8 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 
+import static com.example.highlevel.excel.ExcelUtil.importExcel;
+
 @RestController
 @RequestMapping("/test")
 public class TestController {
@@ -44,6 +48,9 @@ public class TestController {
     
     @Resource
     private FoodRepository foodRepository;
+    
+    @Resource
+    private CustomerRepository customerRepository;
     
     @Resource
     private GitConfig gitConfig;
@@ -143,6 +150,23 @@ public class TestController {
     @RequestMapping("/food/config")
     public Object getGitConfig() {
         return gitConfig;
+    }
+    
+    @RequestMapping("/excel/addCustomer")
+    public void addCustomerByExcel() {
+        String fileName = "E:\\testExcel.xlsx";
+        List<Object[]> list = importExcel(fileName);
+        List<Customer> customers = new LinkedList<>();
+        for (int i = 0; i < list.size(); i++) {
+            Customer customer = new Customer();
+            customer.setName((String) list.get(i)[0]);
+            customer.setPhone(String.valueOf(list.get(i)[1]));
+            customer.setAge((long) list.get(i)[2]);
+            customer.setAddress((String) list.get(i)[3]);
+            System.out.println(customer);
+            customers.add(customer);
+        }
+        customerRepository.saveAll(customers);
     }
     
     public <T> List<T> castEntity(List<Object[]> objects,Class<T> clazz) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
