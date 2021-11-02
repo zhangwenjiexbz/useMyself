@@ -23,7 +23,3 @@ n
 >src/main/java/com/example/highlevel/config/ExecutorConfig.java,5\3\53c6a184d79a37bf6810d7b652bc1f8de7f8e2c8
 m
 =src/main/java/com/example/highlevel/dotest/SemaphoreTest.java,f\5\f5f37823c8d0154712fb94a7c13d9f4352ac0cde
-p
-@src/main/java/com/example/highlevel/kafka/CustomPartitioner.java,e\0\e0a7c5c9326a9f8e6a8766ae09d8c47a621b56f0
-i
-9src/main/java/com/example/highlevel/kafka/MyConsumer.java,1\b\1b283df17c2403590b28a49f503d6b5e3d50c6d5
