@@ -1,9 +1,12 @@
 package com.example.highlevel.controller;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.alibaba.ttl.TtlRunnable;
 import com.example.highlevel.dotest.AsyncClass;
 import com.example.highlevel.gitconfig.GitConfig;
 import com.example.highlevel.pojo.Customer;
+import com.example.highlevel.pojo.EasyPoiCustomerInfo;
 import com.example.highlevel.pojo.FoodDetail;
 import com.example.highlevel.pojo.TestPojo;
 import com.example.highlevel.pojo.Type;
@@ -12,6 +15,7 @@ import com.example.highlevel.service.CustomerRepository;
 import com.example.highlevel.service.FoodRepository;
 import com.example.highlevel.service.FoodTypeRepository;
 import com.example.highlevel.service.TestService;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,16 +24,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 
-import static com.example.highlevel.excel.ExcelUtil.importExcel;
+//import static com.example.highlevel.excel.ExcelUtil.importExcel;
 
+@SuppressWarnings("all")
 @RestController
 @RequestMapping("/test")
 public class TestController {
@@ -152,21 +161,49 @@ public class TestController {
         return gitConfig;
     }
     
-    @RequestMapping("/excel/addCustomer")
-    public void addCustomerByExcel() {
-        String fileName = "E:\\testExcel.xlsx";
-        List<Object[]> list = importExcel(fileName);
-        List<Customer> customers = new LinkedList<>();
-        for (int i = 0; i < list.size(); i++) {
-            Customer customer = new Customer();
-            customer.setName((String) list.get(i)[0]);
-            customer.setPhone(String.valueOf(list.get(i)[1]));
-            customer.setAge((long) list.get(i)[2]);
-            customer.setAddress((String) list.get(i)[3]);
-            System.out.println(customer);
-            customers.add(customer);
+//    @RequestMapping("/excel/addCustomer")
+//    public void addCustomerByExcel() {
+//        String fileName = "E:\\testExcel.xlsx";
+//        List<Object[]> list = importExcel(fileName);
+//        List<Customer> customers = new LinkedList<>();
+//        for (int i = 0; i < list.size(); i++) {
+//            Customer customer = new Customer();
+//            customer.setName((String) list.get(i)[0]);
+//            customer.setPhone(String.valueOf(list.get(i)[1]));
+//            customer.setAge((long) list.get(i)[2]);
+//            customer.setAddress((String) list.get(i)[3]);
+//            System.out.println(customer);
+//            customers.add(customer);
+//        }
+//        customerRepository.saveAll(customers);
+//    }
+
+    /**
+     * 注意easypoi 与 poi的冲突
+     */
+    @RequestMapping("/excel/getAllCustomerExcel")
+    public void getAllCustomerExcel() {
+        List<Customer> all = customerRepository.findAll();
+        List<EasyPoiCustomerInfo> customerInfos = new LinkedList<>();
+        all.forEach(customer -> {
+            EasyPoiCustomerInfo customerInfo = new EasyPoiCustomerInfo();
+            customerInfo.setId(customer.getId());
+            customerInfo.setName(customer.getName());
+            customerInfo.setPhone(customer.getPhone());
+            customerInfo.setAge((int) customer.getAge());
+            customerInfo.setAddress(customer.getAddress());
+            customerInfos.add(customerInfo);
+        });
+
+        try {
+//            String fileName = new String("客户信息表.xls".getBytes(StandardCharsets.UTF_8),"ISO-8859-1");
+            File file = new File("E:\\客户信息表.xls");
+            FileOutputStream outputStream = new FileOutputStream(file);
+            Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(),EasyPoiCustomerInfo.class,customerInfos);
+            workbook.write(outputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        customerRepository.saveAll(customers);
     }
     
     public <T> List<T> castEntity(List<Object[]> objects,Class<T> clazz) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {

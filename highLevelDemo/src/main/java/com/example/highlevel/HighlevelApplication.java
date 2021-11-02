@@ -4,6 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+/**
+ * @author Sebastian
+ */
 @ComponentScan({ "com.example.highlevel.config",
         "com.example.highlevel.controller",
         "com.example.highlevel.dotest",
