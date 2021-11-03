@@ -72,6 +72,9 @@ public class TestRedisController {
         hash.put("field2", "value2");
         stringRedisTemplate.opsForHash().putAll("hash2",hash);
         stringRedisTemplate.opsForHash().put("hash2","field3","value3");
+        // 单独取一个值
+        Object o = stringRedisTemplate.opsForHash().get("hash2", "field3");
+        System.out.println(o);
 
         //绑定散列操作的 key,这样可以连续对同一个散列数据类型进行操作
         BoundHashOperations<String, Object, Object> hashOps = stringRedisTemplate.boundHashOps("hash2");
