@@ -3,15 +3,18 @@ package com.example.highlevel.rabbitmq;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 /**
  * @author Sebastian
  */
 public class Producer {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Producer.class);
 
     /**
      * 队列名称
@@ -29,7 +32,8 @@ public class Producer {
      * exchange使用的routing_key
      */
     private static final String EXCHANGE_ROUTING_KEY = "my_routing_key.#";
-    
+
+    @SuppressWarnings("all")
     public static void send() throws IOException, TimeoutException {
         // 创建连接工厂
         ConnectionFactory connectionFactory = new ConnectionFactory();
@@ -58,7 +62,7 @@ public class Producer {
 
         // 消息是byte[]，可以传递所有类型（转换为byte[]），不局限于字符串
         channel.basicPublish(EXCHANGE_NAME,routingKey,null,message.getBytes());
-        System.out.println("send message:"+message);
+        LOGGER.info("send message:{}",message);
         
         // 关闭连接
         channel.close();
