@@ -13,4 +13,7 @@ data:
   env: NaN
   user:
     username: NaN
-    password: NaN  
+    password: NaN
+spring:
+  application:
+    name: 

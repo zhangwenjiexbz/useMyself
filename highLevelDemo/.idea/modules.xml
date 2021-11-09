@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/highLevelDemo.iml" filepath="$PROJECT_DIR$/highLevelDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../nacosClient/nacosClient.iml" filepath="$PROJECT_DIR$/../../nacosClient/nacosClient.iml" />
     </modules>
   </component>
 </project>
